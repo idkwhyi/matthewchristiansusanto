@@ -48,7 +48,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
                     loading={i < 2 ? 'eager' : 'lazy'}
                   />
                 ) : (
-                  <span class="mono placeholder">{p.cover}</span>
+                  <span class="placeholder" aria-hidden="true">
+                    <span class="ph-title">{p.title}</span>
+                    <span class="mono ph-note">No preview</span>
+                  </span>
                 )}
               </span>
               <span class="num mono">{pad(i + 1)}</span>
@@ -174,10 +177,26 @@ const pad = (n: number) => String(n).padStart(2, '0');
   }
 
   .placeholder {
-    font-size: 12px;
-    color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
     padding: 16px;
     text-align: center;
+  }
+
+  .ph-title {
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--muted);
+  }
+
+  .ph-note {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    opacity: 0.7;
   }
 
   .title {

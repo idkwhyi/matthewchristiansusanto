@@ -52,7 +52,7 @@ const RowSchema = z.object({
     emptyToUndefined,
     z.url({ error: 'kolom "demo_url" harus link yang valid (diawali https://) atau dikosongkan' }).optional(),
   ),
-  cover: required('cover'),
+  cover: z.preprocess(emptyToUndefined, z.string().trim().optional()),
   screenshots: z.string().optional().transform(list),
   published: z.preprocess(
     (v) => (typeof v === 'string' ? v.trim().toUpperCase() : v),
@@ -134,7 +134,7 @@ const ProjectSchema = z.object({
   stack: z.array(z.string()),
   source_url: z.string().optional(),
   demo_url: z.string().optional(),
-  cover: z.string(),
+  cover: z.string().optional(),
   screenshots: z.array(z.string()),
   published: z.boolean(),
 });

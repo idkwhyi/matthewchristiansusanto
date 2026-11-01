@@ -35,7 +35,9 @@ const total = pad(projects.length);
 {
   projects.map(({ data: p }, i) => {
     const cover = projectImage(p.cover);
-    const shots = p.screenshots.map((s) => ({ name: s, img: projectImage(s) }));
+    const shots = p.screenshots
+      .map((s) => ({ name: s, img: projectImage(s) }))
+      .filter((s) => s.img);
     return (
       <template data-project-template={p.slug} data-position={`Project ${pad(i + 1)} / ${total}`}>
         <div class="detail">
@@ -44,28 +46,24 @@ const total = pad(projects.length);
             <p class="summary">{p.summary}</p>
           </div>
 
+          {(cover || shots.length > 0) && (
           <div class="shots">
-            <div class="shot main">
-              {cover ? (
+            {cover && (
+              <div class="shot main">
                 <Image src={cover} alt={`${p.title} screenshot`} widths={[560, 1120]} sizes="(min-width: 600px) 496px, 100vw" />
-              ) : (
-                <span class="mono placeholder">{p.cover}</span>
-              )}
-            </div>
+              </div>
+            )}
             {shots.length > 0 && (
               <div class="shot-grid">
-                {shots.map(({ name, img }, n) => (
+                {shots.map(({ img }, n) => (
                   <div class="shot">
-                    {img ? (
-                      <Image src={img} alt={`${p.title} screenshot ${n + 2}`} widths={[280, 560]} sizes="(min-width: 600px) 242px, 50vw" loading="lazy" />
-                    ) : (
-                      <span class="mono placeholder">{name}</span>
-                    )}
+                    <Image src={img!} alt={`${p.title} screenshot ${n + 2}`} widths={[280, 560]} sizes="(min-width: 600px) 242px, 50vw" loading="lazy" />
                   </div>
                 ))}
               </div>
             )}
           </div>
+          )}
 
           <dl class="facts">
             <div>
@@ -295,13 +293,6 @@ const total = pad(projects.length);
     width: 100%;
     height: 100%;
     object-fit: cover;
-  }
-
-  :global(.detail .placeholder) {
-    font-size: 12px;
-    color: var(--muted);
-    padding: 16px;
-    text-align: center;
   }
 
   :global(.detail .facts) {
