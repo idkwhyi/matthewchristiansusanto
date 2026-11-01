@@ -1,0 +1,193 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Projects from '../components/Projects.astro';
+import ProjectDialog from '../components/ProjectDialog.astro';
+import { site } from '../data/site';
+
+// Sudah difilter (published = TRUE) dan diurutkan berdasarkan kolom "order"
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const year = new Date().getFullYear();
+---
+
+<Base>
+  <div class="shell">
+    <Sidebar />
+
+    <main class="content">
+      <Projects projects={projects} />
+
+      <section id="about" class="about" aria-labelledby="about-title" data-reveal>
+        <h2 id="about-title" class="label">About</h2>
+        <p class="about-text">{site.about}</p>
+        <ul class="skills">
+          {site.skills.map((skill) => <li class="mono">{skill}</li>)}
+        </ul>
+      </section>
+
+      <section id="contact" class="contact" aria-labelledby="contact-title" data-reveal>
+        <h2 id="contact-title" class="label">Contact</h2>
+        <p class="lead">Have a project in mind? Say hello.</p>
+        <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+        <ul class="links mono">
+          {
+            site.links.map((link) => (
+              <li>
+                <a href={link.href} target="_blank" rel="noopener">
+                  {link.label} <span aria-hidden="true">↗</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <footer class="footer mono">
+        <span>© {year} {site.name}</span>
+        <span>{site.location}</span>
+        <a href="#top" data-back-to-top>Back to top ↑</a>
+      </footer>
+    </main>
+  </div>
+
+  <ProjectDialog projects={projects} />
+</Base>
+
+<script>
+  import '../scripts/main.ts';
+</script>
+
+<style>
+  .shell {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 56px var(--gutter) 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 72px;
+  }
+
+  @media (min-width: 960px) {
+    .shell {
+      grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+      align-items: start;
+      gap: 72px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .shell {
+      padding: 32px 20px 32px;
+      gap: 56px;
+    }
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    gap: 112px;
+    min-width: 0;
+  }
+
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    max-width: 720px;
+  }
+
+  .about-text {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    letter-spacing: -0.015em;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skills li {
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .contact {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .lead {
+    font-size: 1.25rem;
+    color: var(--muted);
+  }
+
+  /* Garis aksen "tergambar" dari kiri ke kanan saat hover */
+  .email {
+    align-self: flex-start;
+    font-size: clamp(2rem, 1.2rem + 3vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.04em;
+    line-height: 1.15;
+    padding-bottom: 6px;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    background: linear-gradient(var(--accent), var(--accent)) left bottom / 100% 3px no-repeat;
+  }
+
+  .email:hover {
+    animation: draw 600ms var(--ease-out);
+  }
+
+  @keyframes draw {
+    from {
+      background-size: 0% 3px;
+    }
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+
+  .links a:hover {
+    color: var(--fg);
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .footer a {
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    color: var(--fg);
+  }
+</style>

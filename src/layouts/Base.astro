@@ -1,0 +1,55 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = `${site.name} — ${site.role}`, description = site.description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang={site.lang} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0F0F10" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary" />
+
+    <!-- Pasang tema sebelum halaman tampil, supaya tidak berkedip -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        root.classList.add('js');
+        var theme = 'dark';
+        try {
+          theme = localStorage.getItem('theme') || 'dark';
+        } catch (e) {}
+        root.dataset.theme = theme;
+        var view = 'grid';
+        try {
+          view = localStorage.getItem('project-view') || 'grid';
+        } catch (e) {}
+        root.dataset.view = view;
+      })();
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#projects">Skip to projects</a>
+    <slot />
+  </body>
+</html>

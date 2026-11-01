@@ -1,0 +1,285 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { projectImage } from '../lib/images';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const pad = (n: number) => String(n).padStart(2, '0');
+---
+
+<section id="projects" class="projects" aria-labelledby="projects-title">
+  <header class="head">
+    <div class="title-row">
+      <h2 id="projects-title">Selected work</h2>
+      <span class="mono count">({pad(projects.length)})</span>
+    </div>
+    <div class="switch" role="group" aria-label="Project layout">
+      <button type="button" data-view-btn="grid" aria-pressed="true">Grid</button>
+      <button type="button" data-view-btn="list" aria-pressed="false">List</button>
+    </div>
+  </header>
+
+  {projects.length === 0 && <p class="empty">Projects are on their way.</p>}
+
+  <ul class="items">
+    {
+      projects.map(({ data: p }, i) => {
+        const cover = projectImage(p.cover);
+        return (
+          <li data-reveal style={`--i:${i % 6}; view-transition-name: p-${p.slug}`}>
+            <button
+              type="button"
+              class="item"
+              data-open-project={p.slug}
+              aria-haspopup="dialog"
+              aria-label={`${p.title}, ${p.type}, ${p.year}. Open details`}
+            >
+              <span class="thumb">
+                {cover ? (
+                  <Image
+                    src={cover}
+                    alt=""
+                    widths={[400, 640, 960]}
+                    sizes="(min-width: 960px) 420px, 100vw"
+                    loading={i < 2 ? 'eager' : 'lazy'}
+                  />
+                ) : (
+                  <span class="mono placeholder">{p.cover}</span>
+                )}
+              </span>
+              <span class="num mono">{pad(i + 1)}</span>
+              <span class="title">{p.title}</span>
+              <span class="meta mono">{[p.type, ...p.stack].join(' · ')}</span>
+              <span class="year mono">{p.year}</span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </button>
+          </li>
+        );
+      })
+    }
+  </ul>
+</section>
+
+<style>
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .count {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .switch {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+
+  .switch button {
+    min-height: 44px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition:
+      background-color 300ms var(--ease-out),
+      color 300ms var(--ease-out);
+  }
+
+  .switch button[aria-pressed='true'] {
+    background: var(--fg);
+    color: var(--bg);
+  }
+
+  .empty {
+    color: var(--muted);
+  }
+
+  /* ---------- Grid (default) ---------- */
+  .items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: 48px 24px;
+  }
+
+  .item {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      'thumb thumb'
+      'title year'
+      'meta meta';
+    row-gap: 6px;
+    column-gap: 12px;
+    align-items: baseline;
+  }
+
+  .thumb {
+    grid-area: thumb;
+    margin-bottom: 10px;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: var(--radius);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    display: grid;
+    place-items: center;
+  }
+
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 600ms var(--ease-out);
+  }
+
+  .placeholder {
+    font-size: 12px;
+    color: var(--muted);
+    padding: 16px;
+    text-align: center;
+  }
+
+  .title {
+    grid-area: title;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  .year {
+    grid-area: year;
+  }
+
+  .meta {
+    grid-area: meta;
+  }
+
+  .meta,
+  .year,
+  .num {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .num,
+  .arrow {
+    display: none;
+  }
+
+  .item:hover .thumb img {
+    transform: scale(1.02);
+  }
+
+  /* ---------- List ---------- */
+  :global([data-view='list']) .items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  :global([data-view='list']) .item {
+    grid-template-columns: 40px minmax(0, 1fr) auto auto 24px;
+    grid-template-areas: 'num title meta year arrow';
+    column-gap: 24px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    transition: padding-left 300ms var(--ease-out);
+  }
+
+  :global([data-view='list']) .thumb {
+    display: none;
+  }
+
+  :global([data-view='list']) .num,
+  :global([data-view='list']) .arrow {
+    display: block;
+  }
+
+  :global([data-view='list']) .num {
+    grid-area: num;
+  }
+
+  :global([data-view='list']) .title {
+    font-size: 1.75rem;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+  }
+
+  :global([data-view='list']) .arrow {
+    grid-area: arrow;
+    font-size: 18px;
+    transition: transform var(--dur-fast) var(--ease-out);
+  }
+
+  :global([data-view='list']) .item:hover {
+    padding-left: 8px;
+  }
+
+  :global([data-view='list']) .item:hover .arrow {
+    transform: translate(3px, -3px);
+    color: var(--accent);
+  }
+
+  @media (max-width: 640px) {
+    :global([data-view='list']) .item {
+      grid-template-columns: 32px minmax(0, 1fr) auto;
+      grid-template-areas:
+        'num title arrow'
+        '. meta year';
+      row-gap: 8px;
+      column-gap: 12px;
+    }
+
+    :global([data-view='list']) .title {
+      font-size: 1.375rem;
+    }
+  }
+
+  /* Animasi pindah Grid <-> List (View Transitions) */
+  :global(::view-transition-group(*)) {
+    animation-duration: 450ms;
+    animation-timing-function: var(--ease-out);
+  }
+</style>

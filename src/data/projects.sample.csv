@@ -1,0 +1,7 @@
+order,slug,title,type,year,role,summary,stack,source_url,demo_url,cover,screenshots,published
+1,contoh-web-app,Contoh Web App,Web app,2026,Frontend Developer,Satu kalimat tentang apa project ini dan masalah yang diselesaikan.,"Astro, Supabase",https://github.com/username/contoh-web-app,https://example.com,contoh-web-app.webp,,TRUE
+2,contoh-mobile-app,Contoh Mobile App,Mobile app,2026,Mobile Developer,Satu kalimat tentang apa project ini dan masalah yang diselesaikan.,"React Native, Firebase",https://github.com/username/contoh-mobile-app,,contoh-mobile-app.webp,,TRUE
+3,contoh-landing-page,Contoh Landing Page,Landing page,2025,Designer & Developer,Satu kalimat tentang apa project ini dan masalah yang diselesaikan.,"HTML, CSS, GSAP",https://github.com/username/contoh-landing-page,https://example.com,contoh-landing-page.webp,,TRUE
+4,contoh-dashboard,Contoh Dashboard,Dashboard,2025,Full-stack Developer,Satu kalimat tentang apa project ini dan masalah yang diselesaikan.,"Next.js, PostgreSQL",https://github.com/username/contoh-dashboard,https://example.com,contoh-dashboard.webp,,TRUE
+5,contoh-open-source,Contoh Library,Open source,2024,Maintainer,Satu kalimat tentang apa project ini dan masalah yang diselesaikan.,"TypeScript, Vitest",https://github.com/username/contoh-library,,contoh-open-source.webp,,TRUE
+6,contoh-tersembunyi,Contoh Project Tersembunyi,Web app,2024,Frontend Developer,Baris ini tidak tampil karena published = FALSE.,"Vue, Vite",https://github.com/username/contoh-tersembunyi,,contoh-tersembunyi.webp,,FALSE
