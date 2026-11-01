@@ -44,6 +44,10 @@ const year = new Date().getFullYear();
         <h2 id="contact-title" class="label">Contact</h2>
         <p class="lead">Have a project in mind? Say hello.</p>
         <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+        <p class="based mono">
+          <canvas class="globe" data-ornament="globe" aria-hidden="true"></canvas>
+          <span>Based in {site.location} · GMT+7</span>
+        </p>
         <ul class="links mono">
           {
             site.links.map((link) => (
@@ -70,6 +74,7 @@ const year = new Date().getFullYear();
 
 <script>
   import '../scripts/main.ts';
+  import '../scripts/ornaments.ts';
 </script>
 
 <style>
@@ -179,6 +184,21 @@ const year = new Date().getFullYear();
     from {
       background-size: 0% 3px;
     }
+  }
+
+  .based {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .globe {
+    flex: none;
+    display: block;
+    width: 56px;
+    height: 56px;
   }
 
   .links {
