@@ -86,18 +86,20 @@ const total = pad(projects.length);
             </div>
           </dl>
 
-          <div class="actions">
-            {p.demo_url && (
-              <a class="btn primary" href={p.demo_url} target="_blank" rel="noopener">
-                Live demo <span aria-hidden="true">↗</span>
-              </a>
-            )}
-            {p.source_url && (
-              <a class="btn" href={p.source_url} target="_blank" rel="noopener">
-                Source code <span aria-hidden="true">↗</span>
-              </a>
-            )}
-          </div>
+          {(p.demo_url || p.source_url) && (
+            <div class="actions">
+              {p.demo_url && (
+                <a class="btn primary" href={p.demo_url} target="_blank" rel="noopener">
+                  Live demo <span aria-hidden="true">↗</span>
+                </a>
+              )}
+              {p.source_url && (
+                <a class="btn" href={p.source_url} target="_blank" rel="noopener">
+                  Source code <span aria-hidden="true">↗</span>
+                </a>
+              )}
+            </div>
+          )}
         </div>
       </template>
     );

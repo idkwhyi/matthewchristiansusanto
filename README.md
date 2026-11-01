@@ -42,11 +42,13 @@ Satu baris = satu project. Kolom:
 | `role` | ya | Peran Anda |
 | `summary` | ya | Satu kalimat ringkasan |
 | `stack` | ya | Dipisah koma, mis. `Astro, Supabase` |
-| `source_url` | tidak | Link repo, diawali `https://`. Kosongkan untuk menyembunyikan tombol Source code |
+| `source_url` | tidak | Link repo, diawali `https://`. Kosongkan untuk project privat; tombol Source code disembunyikan |
 | `demo_url` | tidak | Kosongkan kalau tidak ada demo; tombol Live demo otomatis disembunyikan |
 | `cover` | ya | Nama file gambar utama di `src/assets/projects/` |
 | `screenshots` | tidak | Nama file gambar tambahan, dipisah koma |
 | `published` | ya | `TRUE` untuk tampil, `FALSE` untuk menyembunyikan tanpa menghapus |
+
+Baris dengan `published` = `FALSE` dianggap draft: boleh belum lengkap, tidak divalidasi, dan tidak tampil.
 
 Kalau ada data yang salah (kolom wajib kosong, link tidak valid, slug ganda), build berhenti dan menampilkan baris mana yang perlu diperbaiki. Website yang sedang tayang tidak berubah sampai datanya benar.
 

@@ -1,0 +1,108 @@
+---
+import { site } from '../data/site';
+---
+
+<section id="experience" aria-labelledby="experience-title">
+  <h2 id="experience-title" class="label">Experience</h2>
+  <ol class="jobs">
+    {
+      site.experience.map((job, i) => {
+        const current = !job.end;
+        return (
+          <li class="job" data-reveal style={`--i:${i}`}>
+            <p class="period mono">
+              {current && <span class="dot" aria-hidden="true" />}
+              {job.start} — {job.end || 'Present'}
+            </p>
+            <div class="body">
+              <h3 class="role">{job.role}</h3>
+              <p class="company">
+                {job.company} <span class="type mono">{job.type}</span>
+              </p>
+              <p class="summary">{job.summary}</p>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ol>
+</section>
+
+<style>
+  .label {
+    margin-bottom: 24px;
+  }
+
+  .jobs {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .job {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 8px 32px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .period {
+    align-self: start;
+    padding-top: 7px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .dot {
+    flex: none;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .role {
+    font-size: 1.375rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  .company {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+  }
+
+  .type {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .summary {
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .job {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .period {
+      padding-top: 0;
+    }
+  }
+</style>

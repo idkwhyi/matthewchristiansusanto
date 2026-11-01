@@ -95,6 +95,9 @@ async function loadProjects() {
 
   parsed.data.forEach((raw, i) => {
     const rowNumber = i + 2; // baris 1 = header
+    // Draft (published FALSE / 0) dilewati tanpa validasi, jadi boleh belum lengkap.
+    const published = (raw.published ?? '').trim().toUpperCase();
+    if (published === 'FALSE' || published === '0') return;
     const result = RowSchema.safeParse(raw);
     if (!result.success) {
       for (const issue of result.error.issues) problems.push(`  • Baris ${rowNumber}: ${issue.message}`);

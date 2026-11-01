@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Sidebar from '../components/Sidebar.astro';
 import Projects from '../components/Projects.astro';
+import Experience from '../components/Experience.astro';
 import ProjectDialog from '../components/ProjectDialog.astro';
 import { site } from '../data/site';
 
@@ -17,6 +18,8 @@ const year = new Date().getFullYear();
 
     <main class="content">
       <Projects projects={projects} />
+
+      <Experience />
 
       <section id="about" class="about" aria-labelledby="about-title" data-reveal>
         <h2 id="about-title" class="label">About</h2>
