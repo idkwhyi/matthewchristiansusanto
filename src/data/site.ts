@@ -6,7 +6,7 @@ export const site = {
   // Bahasa teks di website: 'en' atau 'id'
   lang: 'en',
   name: 'Matthew Christian Susanto',
-  role: 'Frontend Developer',
+  role: 'Developer',
   tagline: 'One sentence on what you build and for whom.',
   // Kosongkan ('') untuk menyembunyikan indikator status.
   status: 'Open to work',
@@ -24,5 +24,5 @@ export const site = {
     { label: 'Resume (PDF)', href: `${import.meta.env.BASE_URL}resume.pdf` },
   ],
   // Untuk SEO dan preview saat link dibagikan
-  description: 'Portfolio of Matthew Christian Susanto, Frontend Developer.',
+  description: 'Portfolio of Matthew Christian Susanto, Developer.',
 } as const;
