@@ -42,7 +42,7 @@ Satu baris = satu project. Kolom:
 | `role` | ya | Peran Anda |
 | `summary` | ya | Satu kalimat ringkasan |
 | `stack` | ya | Dipisah koma, mis. `Astro, Supabase` |
-| `source_url` | ya | Link repo, diawali `https://` |
+| `source_url` | tidak | Link repo, diawali `https://`. Kosongkan untuk menyembunyikan tombol Source code |
 | `demo_url` | tidak | Kosongkan kalau tidak ada demo; tombol Live demo otomatis disembunyikan |
 | `cover` | ya | Nama file gambar utama di `src/assets/projects/` |
 | `screenshots` | tidak | Nama file gambar tambahan, dipisah koma |

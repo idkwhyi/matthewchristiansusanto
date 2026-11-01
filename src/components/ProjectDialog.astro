@@ -92,9 +92,11 @@ const total = pad(projects.length);
                 Live demo <span aria-hidden="true">↗</span>
               </a>
             )}
-            <a class="btn" href={p.source_url} target="_blank" rel="noopener">
-              Source code <span aria-hidden="true">↗</span>
-            </a>
+            {p.source_url && (
+              <a class="btn" href={p.source_url} target="_blank" rel="noopener">
+                Source code <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
         </div>
       </template>

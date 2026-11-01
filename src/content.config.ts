@@ -46,7 +46,7 @@ const RowSchema = z.object({
   stack: required('stack').transform(list),
   source_url: z.preprocess(
     emptyToUndefined,
-    z.url({ error: 'kolom "source_url" wajib diisi dengan link yang valid (diawali https://)' }),
+    z.url({ error: 'kolom "source_url" harus link yang valid (diawali https://) atau dikosongkan' }).optional(),
   ),
   demo_url: z.preprocess(
     emptyToUndefined,
@@ -129,7 +129,7 @@ const ProjectSchema = z.object({
   role: z.string(),
   summary: z.string(),
   stack: z.array(z.string()),
-  source_url: z.string(),
+  source_url: z.string().optional(),
   demo_url: z.string().optional(),
   cover: z.string(),
   screenshots: z.array(z.string()),
