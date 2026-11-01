@@ -14,7 +14,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang={site.lang} data-theme="dark">
+<html lang={site.lang} data-theme="dark" data-view="list">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -40,9 +40,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
           theme = localStorage.getItem('theme') || 'dark';
         } catch (e) {}
         root.dataset.theme = theme;
-        var view = 'grid';
+        var view = 'list';
         try {
-          view = localStorage.getItem('project-view') || 'grid';
+          view = localStorage.getItem('project-view') || 'list';
         } catch (e) {}
         root.dataset.view = view;
       })();
