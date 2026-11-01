@@ -7,7 +7,8 @@ export const site = {
   lang: 'en',
   name: 'Matthew Christian Susanto',
   role: 'Developer',
-  tagline: 'One sentence on what you build and for whom.',
+  // Kosongkan ('') untuk menyembunyikan tagline.
+  tagline: '',
   // Kosongkan ('') untuk menyembunyikan indikator status.
   status: 'Open to work',
   // Quote di bagian About. Kosongkan aboutAuthor ('') kalau teksnya bukan quote.

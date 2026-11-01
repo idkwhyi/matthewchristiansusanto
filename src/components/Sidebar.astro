@@ -28,7 +28,7 @@ const year = new Date().getFullYear();
       {site.name.split(' ').map((word) => <span>{word}</span>)}
     </h1>
     <p class="role">{site.role}</p>
-    <p class="tagline">{site.tagline}</p>
+    {site.tagline && <p class="tagline">{site.tagline}</p>}
     {
       site.status && (
         <p class="status mono">
