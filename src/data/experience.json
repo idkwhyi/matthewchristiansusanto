@@ -1,0 +1,41 @@
+[
+  {
+    "role": "Full-stack Web Developer",
+    "company": "PT Radsoft",
+    "type": "Full-time",
+    "start": "Mar 2026",
+    "end": "",
+    "summary": "Developing and maintaining web applications for investment management companies.",
+    "highlights": [
+      "Build new menus and features in investment management applications that clients use every day.",
+      "Fix bugs in daily investment management flows and verify the accuracy of report data.",
+      "Create new reports and improve existing ones by optimizing their SQL queries.",
+      "Built APIs connecting the company's internal systems with client systems for transactions, client data, disbursements and investor verification."
+    ],
+    "stack": [".NET", "SQL Server"]
+  },
+  {
+    "role": "Full-stack Developer",
+    "company": "PT Bestmark Indonesia",
+    "type": "Project",
+    "start": "Mar 2026",
+    "end": "",
+    "summary": "Building a B2B marketplace platform end to end, from backend to frontend.",
+    "highlights": [
+      "Built the platform across three repositories: the storefront, the backend API and the admin dashboard.",
+      "Implemented the core flows, from authentication to ordering and transactions.",
+      "Built an admin dashboard to monitor and manage the main B2B store."
+    ],
+    "stack": ["Next.js", "NestJS", "PostgreSQL", "Redis"]
+  },
+  {
+    "role": "Web Developer Intern",
+    "company": "PT Nusantara Compnet Integrator",
+    "type": "Internship",
+    "start": "Feb 2025",
+    "end": "Aug 2025",
+    "summary": "Built internal web apps for sales, meeting room booking and a company event game.",
+    "highlights": [],
+    "stack": []
+  }
+]

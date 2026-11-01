@@ -20,6 +20,16 @@ import { site } from '../data/site';
                 {job.company} <span class="type mono">{job.type}</span>
               </p>
               <p class="summary">{job.summary}</p>
+              {job.highlights.length > 0 && (
+                <ul class="highlights">
+                  {job.highlights.map((h) => <li>{h}</li>)}
+                </ul>
+              )}
+              {job.stack.length > 0 && (
+                <ul class="stack mono" aria-label="Tech stack">
+                  {job.stack.map((s) => <li>{s}</li>)}
+                </ul>
+              )}
             </div>
           </li>
         );
@@ -93,6 +103,36 @@ import { site } from '../data/site';
   }
 
   .summary {
+    color: var(--muted);
+  }
+
+  .highlights {
+    margin: 4px 0 0;
+    padding-left: 1.1em;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .highlights li::marker {
+    color: var(--accent);
+  }
+
+  .stack {
+    list-style: none;
+    margin: 6px 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stack li {
+    padding: 2px 8px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 12px;
     color: var(--muted);
   }
 

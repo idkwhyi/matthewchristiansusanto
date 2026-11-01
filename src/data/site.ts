@@ -1,3 +1,5 @@
+import experience from './experience.json';
+
 /**
  * Profil dan kontak. Ini jarang berubah, jadi cukup diedit di sini.
  * Data project ada di Google Sheets (lihat README.md).
@@ -15,33 +17,8 @@ export const site = {
   about:
     'We are simply never going to realize a state of software nirvana where everything is supremely satisfying. That’s an important emotional realization. The fundamental reward of an improvement process is the experience of betterment, not some mythical destination.',
   aboutAuthor: 'Mark Slee',
-  // Riwayat kerja, terbaru di atas. end: '' berarti masih berjalan (tampil sebagai "Present").
-  experience: [
-    {
-      role: 'Full-stack Web Developer',
-      company: 'PT Radsoft',
-      type: 'Full-time',
-      start: 'Mar 2026',
-      end: '',
-      summary: 'Building web applications for investment management.',
-    },
-    {
-      role: 'Full-stack Developer',
-      company: 'PT Bestmark Indonesia',
-      type: 'Project',
-      start: 'Mar 2026',
-      end: '',
-      summary: 'Building a B2B marketplace platform.',
-    },
-    {
-      role: 'Web Developer Intern',
-      company: 'PT Nusantara Compnet Integrator',
-      type: 'Internship',
-      start: 'Feb 2025',
-      end: 'Aug 2025',
-      summary: 'Built internal web apps for sales, meeting room booking and a company event game.',
-    },
-  ],
+  // Riwayat kerja ada di src/data/experience.json (lihat README.md).
+  experience,
   skills: ['TypeScript', 'React', 'Astro', 'Node.js', 'Figma'],
   location: 'Jakarta, Indonesia',
   email: 'matthewchristiansusanto@gmail.com',

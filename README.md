@@ -21,12 +21,25 @@ Tanpa `PROJECTS_CSV_URL`, website memakai data contoh dari `src/data/projects.sa
 |---|---|
 | Nama, peran, tagline, status, about, skill, email, link sosial | `src/data/site.ts` |
 | CV | taruh file di `public/resume.pdf` |
+| Riwayat kerja (experience) | `src/data/experience.json` (lihat di bawah) |
 | Daftar project | Google Sheets (lihat di bawah) |
 | Gambar project | `src/assets/projects/` |
 | Domain website | `site` di `astro.config.mjs` |
 | Warna aksen | `--accent` di `src/styles/global.css` |
 
 Hapus gambar contoh `contoh-*.webp` di `src/assets/projects/` setelah Anda memasukkan gambar sendiri.
+
+## Mengelola experience
+
+Edit `src/data/experience.json`. Satu objek = satu pekerjaan, terbaru di atas.
+
+| Field | Keterangan |
+|---|---|
+| `role`, `company`, `type` | Jabatan, perusahaan, jenis (Full-time, Project, Internship, ...) |
+| `start`, `end` | Mis. `Mar 2026`. `end` dikosongkan (`""`) berarti masih berjalan, tampil sebagai "Present" |
+| `summary` | Satu kalimat ringkasan |
+| `highlights` | Daftar poin pekerjaan/pencapaian. `[]` untuk menyembunyikan |
+| `stack` | Daftar teknologi. `[]` untuk menyembunyikan |
 
 ## Mengelola project lewat Google Sheets
 
