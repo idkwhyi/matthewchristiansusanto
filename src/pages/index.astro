@@ -20,7 +20,18 @@ const year = new Date().getFullYear();
 
       <section id="about" class="about" aria-labelledby="about-title" data-reveal>
         <h2 id="about-title" class="label">About</h2>
-        <p class="about-text">{site.about}</p>
+        {
+          site.aboutAuthor ? (
+            <figure class="about-quote">
+              <blockquote class="about-text">
+                <p>“{site.about}”</p>
+              </blockquote>
+              <figcaption class="mono">— {site.aboutAuthor}</figcaption>
+            </figure>
+          ) : (
+            <p class="about-text">{site.about}</p>
+          )
+        }
         <ul class="skills">
           {site.skills.map((skill) => <li class="mono">{skill}</li>)}
         </ul>
@@ -101,6 +112,22 @@ const year = new Date().getFullYear();
     font-size: 1.5rem;
     line-height: 1.4;
     letter-spacing: -0.015em;
+  }
+
+  .about-quote {
+    margin: 0;
+    padding-left: 20px;
+    border-left: 2px solid var(--accent);
+  }
+
+  .about-quote blockquote {
+    margin: 0;
+  }
+
+  .about-quote figcaption {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 0.875rem;
   }
 
   .skills {

@@ -10,8 +10,10 @@ export const site = {
   tagline: 'One sentence on what you build and for whom.',
   // Kosongkan ('') untuk menyembunyikan indikator status.
   status: 'Open to work',
+  // Quote di bagian About. Kosongkan aboutAuthor ('') kalau teksnya bukan quote.
   about:
-    'Two sentences about you: what you do, what you care about, and where you are based.',
+    'We are simply never going to realize a state of software nirvana where everything is supremely satisfying. That’s an important emotional realization. The fundamental reward of an improvement process is the experience of betterment, not some mythical destination.',
+  aboutAuthor: 'Mark Slee',
   skills: ['TypeScript', 'React', 'Astro', 'Node.js', 'Figma'],
   location: 'Jakarta, Indonesia',
   email: 'matthewchristiansusanto@gmail.com',
