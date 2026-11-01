@@ -38,7 +38,7 @@ Edit `src/data/experience.json`. Satu objek = satu pekerjaan, terbaru di atas.
 | `role`, `company`, `type` | Jabatan, perusahaan, jenis (Full-time, Project, Internship, ...) |
 | `start`, `end` | Mis. `Mar 2026`. `end` dikosongkan (`""`) berarti masih berjalan, tampil sebagai "Present" |
 | `summary` | Satu kalimat ringkasan |
-| `highlights` | Daftar poin pekerjaan/pencapaian. `[]` untuk menyembunyikan |
+| `highlights` | Daftar poin, tiap poin berisi `title` (label singkat, mis. `"Reporting"`) dan `text` (penjelasan satu kalimat). `[]` untuk menyembunyikan |
 | `stack` | Daftar teknologi. `[]` untuk menyembunyikan |
 
 ## Mengelola project lewat Google Sheets
@@ -57,7 +57,7 @@ Satu baris = satu project. Kolom:
 | `stack` | ya | Dipisah koma, mis. `Astro, Supabase` |
 | `source_url` | tidak | Link repo, diawali `https://`. Kosongkan untuk project privat; tombol Source code disembunyikan |
 | `demo_url` | tidak | Kosongkan kalau tidak ada demo; tombol Live demo otomatis disembunyikan |
-| `cover` | ya | Nama file gambar utama di `src/assets/projects/` |
+| `cover` | tidak | Nama file gambar utama di `src/assets/projects/`. Kosongkan kalau belum ada gambar; kartu menampilkan judul project dengan tulisan "No preview" |
 | `screenshots` | tidak | Nama file gambar tambahan, dipisah koma |
 | `published` | ya | `TRUE` untuk tampil, `FALSE` untuk menyembunyikan tanpa menghapus |
 
@@ -65,7 +65,7 @@ Baris dengan `published` = `FALSE` dianggap draft: boleh belum lengkap, tidak di
 
 Kalau ada data yang salah (kolom wajib kosong, link tidak valid, slug ganda), build berhenti dan menampilkan baris mana yang perlu diperbaiki. Website yang sedang tayang tidak berubah sampai datanya benar.
 
-Gambar yang namanya tidak ditemukan di `src/assets/projects/` diganti placeholder, dengan peringatan di log build.
+Gambar yang namanya tidak ditemukan di `src/assets/projects/` diganti placeholder yang sama, dengan peringatan di log build.
 
 ### Menghubungkan Google Sheets
 

@@ -22,7 +22,12 @@ import { site } from '../data/site';
               <p class="summary">{job.summary}</p>
               {job.highlights.length > 0 && (
                 <ul class="highlights">
-                  {job.highlights.map((h) => <li>{h}</li>)}
+                  {job.highlights.map((h) => (
+                    <li class="hl">
+                      <span class="hl-title mono">{h.title}</span>
+                      <span class="hl-text">{h.text}</span>
+                    </li>
+                  ))}
                 </ul>
               )}
               {job.stack.length > 0 && (
@@ -107,15 +112,56 @@ import { site } from '../data/site';
   }
 
   .highlights {
-    margin: 4px 0 0;
-    padding-left: 1.1em;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    list-style: none;
+    margin: 10px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
-  .highlights li::marker {
-    color: var(--accent);
+  .hl {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 14px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    transition: border-color var(--dur-fast) var(--ease-out);
+  }
+
+  .hl:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
+  .hl:hover {
+    border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  }
+
+  .hl-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+
+  .hl-title::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  .hl-text {
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--muted);
   }
 
   .stack {
@@ -138,6 +184,10 @@ import { site } from '../data/site';
 
   @media (max-width: 640px) {
     .job {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .highlights {
       grid-template-columns: minmax(0, 1fr);
     }
 
