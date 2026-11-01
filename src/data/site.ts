@@ -19,7 +19,7 @@ export const site = {
     { label: 'GitHub', href: 'https://github.com/username' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/username' },
     // Taruh file CV di folder public/ dengan nama resume.pdf
-    { label: 'Resume (PDF)', href: '/resume.pdf' },
+    { label: 'Resume (PDF)', href: `${import.meta.env.BASE_URL}resume.pdf` },
   ],
   // Untuk SEO dan preview saat link dibagikan
   description: 'Portfolio of Your Name, Frontend Developer.',

@@ -2,7 +2,9 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  // Ganti dengan domain Anda setelah deploy, mis. 'https://namaanda.dev'
-  site: 'https://example.com',
+  // GitHub Pages: https://idkwhyi.github.io/matthewchristiansusanto/
+  // Kalau nanti pakai domain sendiri, ganti `site` ke domain itu dan hapus `base`.
+  site: 'https://idkwhyi.github.io',
+  base: '/matthewchristiansusanto/',
   prefetch: true,
 });

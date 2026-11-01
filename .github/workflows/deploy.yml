@@ -1,0 +1,48 @@
+# Build dan deploy ke GitHub Pages.
+# Jalan setiap push ke main, setiap hari 06:17 WIB (supaya perubahan di Google Sheets
+# ikut tayang), dan bisa dijalankan manual dari tab Actions.
+# Data project diambil dari secret repo PROJECTS_CSV_URL (Settings > Secrets and variables > Actions).
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 23 * * *' # 06:17 WIB
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+        env:
+          PROJECTS_CSV_URL: ${{ secrets.PROJECTS_CSV_URL }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

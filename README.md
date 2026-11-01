@@ -75,7 +75,7 @@ Contoh memakai Cloudflare Pages. Netlify dan Vercel caranya mirip.
 Website statis dibangun ulang untuk mengambil data terbaru. Dua cara:
 
 - **Deploy hook (langsung):** buat deploy hook di pengaturan build hosting Anda. Simpan URL-nya sebagai bookmark; setiap selesai mengedit sheet, buka atau kirim POST ke URL itu. Contoh: `curl -X POST "<URL deploy hook>"`.
-- **Otomatis setiap hari:** simpan URL deploy hook sebagai secret repo `DEPLOY_HOOK_URL` (GitHub → Settings → Secrets and variables → Actions). Workflow `.github/workflows/daily-rebuild.yml` akan memicunya setiap pagi pukul 06.17 WIB.
+- **Otomatis setiap hari (GitHub Pages):** workflow `.github/workflows/deploy.yml` build dan deploy ke GitHub Pages setiap push ke `main` dan setiap pagi pukul 06.17 WIB. Simpan link CSV sebagai secret repo `PROJECTS_CSV_URL` (GitHub → Settings → Secrets and variables → Actions). Bisa juga dijalankan manual dari tab Actions.
 
 ## Struktur
 
